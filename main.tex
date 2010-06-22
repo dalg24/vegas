@@ -1,0 +1,66 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[a4paper]{geometry}
+\geometry{vmargin={2cm,2cm},hmargin={1cm,1cm}}
+
+\title{ANS-WINTER2010}
+\date{2010.06.08}
+\author{Damien Lebrun-Grandi\'e}
+
+\newcommand\bs{\boldsymbol}
+\newcommand\bx{\bs{x}}
+\newcommand\bn{\bs{\nabla}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%HEADERS
+\noindent
+\begin{tabular}{|p{9cm}|}
+  \hline
+  \begin{center}
+    \textbf{Method of Manufactured Solutions for a 2D Neutronics/Heat Conduction Test Case with Adaptive Multimesh hp-FEM} \\
+    Damien Lebrun-Grandi\'e,%$^{a}$,
+    Jean Ragusa,%$^{a}$, 
+%    Pavel Solin$^{b}$, 
+    Bruno Turcksin \\%$^{a}$, 
+%    Ondrej Certik$^{b}$ \\
+    \emph{Department of Nuclear Engineering, Texas A\&M University, College Station, TX 77843-3133, USA} \\
+%    \emph{$^{b}$Department of Mathematics and Statistics, University of Nevada, Reno, NV 89557-0208, USA} \\
+    lebrungd@neo.tamu.edu
+  \end{center} \\
+  \hline
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%BODY
+\input{introduction}
+
+\input{theory}
+
+\input{results}
+
+\input{conclusion}
+
+\section*{Acknowledgments}
+The authors are grateful for 
+
+
+
+\begin{thebibliography}{99}
+\bibitem{roache2002}  P. J. ROACHE,
+  ``Code Verification by the Method of Manufactured Solutions'', 
+  \emph{ASME J. of Fluids Eng.},
+  \textbf{124}, 1, 4-10 (2002)
+\bibitem{solin2010} P. SOLIN, D. ANDRS, J. CERVENY, M.SIMKO,
+  ``PDE-Independent Adaptive hp-FEM Based on Hierarchic Extension of Finite Element Spaces'',
+  \emph{J. Comput. Appl. Math.},
+  \textbf{233}, 1374-1394 (2010)
+\end{thebibliography}
+
+%\bibliographystyle{genetics} 
+%\bibliography{references}
+
+\end{document}

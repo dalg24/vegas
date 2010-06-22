@@ -1,0 +1,9 @@
+\section*{INTRODUCTION}
+Once upon a time...
+
+Typically, the accuracy and convergence of numerical models are established by using simplified problems for which analytical solutions are available. For time-dependent coupled multiphysics problems, analytical solutions are more difficult to obtain and we need to resort to the Method of Manufactured Solutions (MMS) \cite{roache2002}. The MMS can be used to analyze and prove code correctness.
+
+The basic philosophy behind MMS is that an exact solution Uref with enough smoothness in space and time is chosen and substituted into the PDE to obtain a suitable forcing function (i.e., right-hand-side of the PDE) that is employed in the numerical simulation. Therefore, the numerically obtained values can be compared to the exact ones, providing a measure of the error. This procedure can be applied to nonlinear and coupled physics problems and is an useful tool for code verification purposes.
+
+A new C++ library for adaptive hp-FEM currently is currently under active development at the University of Nevada, Reno \cite{solin2010}.   The exponential convergence makes the method a very attractive choice for solving multiphysics PDE systems.  In collaboration with the hp-FEM group at Reno, Texas A\&M University is
+

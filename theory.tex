@@ -1,0 +1,104 @@
+\section*{THEORY}
+Method of Manufactured Solutions to verify convergence to exact solutions
+
+
+\subsection*{Governing equations}
+2D nonlinear transient problem involving neutronics and heat conduction
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  HEAT CONDUCTION
+%\subsection*{$\rightarrow$Heat conduction}
+Let us solve the following equation for the temperature $T(\bx, t)$
+\begin{align}
+  \rho c_p \frac{\partial T}{\partial t} 
+  - \nabla\cdot(k(T) \nabla T) 
+  - \kappa \Sigma_{f} \phi(\bx,t)&  \nonumber \\
+  - Q_T(\bx,t) &= 0 \label{heatcond_eq}
+\end{align}
+on a rectangular domain $\Omega$ with a homogeneous (zero) Dirichlet boundary condition $T(\bx,t) = 0$ on $\partial\Omega$, where the thermal conductivity $k$ depends on the temperature $T$
+\begin{align}
+  k(T) = k(T_{ref}) + \left. \frac{\partial k}{\partial T}\right|_{ref} \left( T - T_{ref} \right)
+\end{align}
+
+$Q_T$ is the extraneaous temperature source and will be determined by the choice of the exact solution in the MMS procedure.  This is a function of space and time a priori.
+
+The weak formulation of the time discretized (implicit Euler) heat conduction problem is derived in the standard way, by first multiplying the equation \eqref{heatcond_eq} with the test functions $u_{i}$ and then integrating over the domain $\Omega$
+\begin{align}
+  \int_{\Omega} \rho c_p \frac{T^{n+1}-T{^n}}{\tau} u_i d\bx 
+  - \int_{\partial\Omega} k(T^{n+1}) \nabla T^{n+1} u_i \cdot \bs{n} d\bx&  \nonumber \\
+  + \int_{\Omega} k(T^{n+1}) \nabla T^{n+1} \cdot \nabla u_i d\bx
+  - \int_{\Omega} \kappa_1 \Sigma_{f1} \phi_1^{n+1} u_i d\bx& \nonumber \\
+  - \int_{\Omega} Q_T^{n+1} u_i d\bx = 0& \label{heatcond_wf}
+\end{align}
+(constant time step $\tau$)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  NEUTRONICS
+%\subsection*{$\rightarrow$Neutronics}
+The neutron flux $\phi(\bx,t)$ is described by means of a simple one-group neutron diffusion equation
+\begin{align}
+  \frac{1}{v} \frac{\partial\phi}{\partial t} 
+  - \nabla\cdot(D \nabla \phi) 
+  + \Sigma_{a}(T) \phi 
+  - \nu \Sigma_{f} \phi_1& \nonumber \\
+  - Q(\bx,t) &= 0 \label{neutron_eq}
+\end{align}
+
+Doppler feedback is accounted in the model through the removal cross section $\Sigma_{a}$, which is affected by temperature variations.
+\begin{align}
+  \Sigma_{a}(T) = \Sigma_{a}(T_{ref}) 
+  + \left. \frac{\partial \Sigma_{a}}{\partial \sqrt{T}}\right|_{ref} 
+    \left( \sqrt{T} - \sqrt{T_{ref}} \right)
+\end{align}
+
+The forcing function $Q$ in the equation \eqref{neutron_eq} will be determined later when choosing the exact solutions, and substituting these into the governing equations.
+
+Finally, with the homogeneous zero Dirichlet condition, the weak formulation of the neutronics problem reads
+\begin{align}
+  \int_{\Omega} \frac{1}{v} \frac{\phi^{n+1}-\phi{^n}}{\tau} u_i d\bx 
+  - \int_{\partial\Omega} D \nabla \phi^{n+1} u_i \cdot \bs{n} d\bx& \nonumber \\
+  + \int_{\Omega} D \nabla \phi^{n+1} \cdot \nabla u_i d\bx 
+  + \int_{\Omega} \Sigma_{a}(T^{n+1}) \phi^{n+1} u_i d\bx& \nonumber \\
+  - \int_{\Omega} \nu \Sigma_{f} \phi^{n+1} u_i d\bx 
+  - \int_{\Omega} Q^{n+1} u_i d\bx = 0&
+\end{align}
+
+
+
+\subsection*{Newton's method}
+For fixed time level $n$ we will solve the time independent nonlinear problem for the temperature $T^{n}$ and the neutron flux $\phi^{n}$ by means of the Newton's Method.
+
+Let $\bs{Y}^n = (y_1^n,y_2^n,...,y_N^n)^T$ be the vector of unknown coefficients so that we have
+
+At each Newton iteration $k$ we solve
+\begin{align}
+  \bs{Y}_{k+1}^{n} = \bs{Y}_{k}^{n} 
+  - \bs{J}^{-1}(\bs{Y}_{k}^{n}) \bs{F}(\bs{Y}_{k}^{n})
+\end{align}
+or
+\begin{align}
+  \bs{J}(\bs{Y}_{k}^{n}) \delta\bs{Y}_{k}^{n} = - \bs{F}(\bs{Y}_{k}^{n}) \label{newton}
+\end{align}
+where $\bs{Y}_{k+1}^{n} = \bs{Y}_{k}^{n} + \delta\bs{Y}_{k}^{n}$, $n$ and $k$ being indices for time and Newton iterations respectively.
+
+All we need to do is to provide the code with the Jacobian matrix $\bs{J}^{n}=\bs{J}(\bs{Y}^{n})=D\bs{F}^{n}/D\bs{Y}^{n}$
+and the residual vector $\bs{F}^{n}=\bs{F}(\bs{Y}^n)=\bs{0}$.
+
+\subsection*{Manufactured Solution}
+Choice of
+\begin{align}
+  T(x,y,t) = 
+  C_T \left(1+\tanh(r_T t)\right)
+  \sin\left(\frac{\pi x}{L_X}\right)
+  \sin\left(\frac{\pi y}{L_Y}\right)
+\end{align}
+and
+\begin{align}
+  \phi(x,y,t) = 
+  C_F \left(1+\exp(r_F t)\right)
+  \sin\left(\frac{\pi x}{L_X}\right)
+  \sin\left(\frac{\pi y}{L_Y}\right)
+  \frac{x}{L_X}
+  \frac{y}{L_Y}
+\end{align}
+
