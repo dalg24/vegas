@@ -1,0 +1,29 @@
+Generating the .pdf file (LaTeX)
+--------------------------------
+
+[shell prompt]$ pdflatex main.tex
+
+
+Contributing
+------------
+
+[shell prompt]$ vim <file>.tex
+[shell prompt]$ git add <file>.tex
+[shell prompt]$ git commit -m 'comment your changes'
+[shell prompt]$ git push
+
+Note: to be able to push to the remote repository you need to send your
+ssh public key to <lebrungd@neo.tamu.edu>
+Copy and paste the content of the file ~/.ssh/id_rsa.pub
+If it doesn't exist, do a
+[shell prompt]$ ssh-keygen -t rsa
+If you still don't get it you're hopeless...
+Call (979)422-7165 and see with Bruno :)
+
+
+Contributors
+------------
+
+Damien Lebrun-Grandie
+Jean Ragusa
+Bruno Turcksin
