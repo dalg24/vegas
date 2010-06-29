@@ -7,7 +7,7 @@ Method of Manufactured Solutions to verify convergence to exact solutions for a 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  HEAT CONDUCTION
 %\subsection*{$\rightarrow$Heat conduction}
-The temperature $T(\bx, t)$ in the medium is of solution of the heat equation 
+The temperature $T(\bx, t)$ in the medium is solution of the heat equation 
 \begin{align}
   \rho c_p \frac{\partial T}{\partial t} 
   - \nabla\cdot(k(T) \nabla T) 
@@ -50,7 +50,7 @@ with the homogeneous zero Dirichlet condition. Doppler feedback is accounted in 
     \left( \sqrt{T} - \sqrt{T_{ref}} \right)
 \end{align}
 %
-$v$ is the neutron velocity, $D$ the diffusion coefficient, $\nu$ and $\Sigma_{f}$ the number of neutron per fission and the fission cross section respectively.  The forcing function $Q_{\phi}$ in the equation \eqref{neutron_eq} will be determined later when choosing the exact solutions, and substituting these into the governing equations.
+$v$ is the neutron velocity, $D$ the diffusion coefficient, $\nu$ and $\Sigma_{f}$ the number of neutrons per fission and the fission cross section respectively.  The forcing function $Q_{\phi}$ in the equation \eqref{neutron_eq} will be determined later when choosing the exact solutions, and substituting these into the governing equations.
 
 Finally, the weak formulation of the neutronics problem reads
 \begin{align}
@@ -79,4 +79,4 @@ or
 \end{align}
 where $\bs{Y}_{k+1}^{n} = \bs{Y}_{k}^{n} + \delta\bs{Y}_{k}^{n}$, and $n$ and $k$ are indices for time and Newton iterations, respectively.
 
-In Eq. \eqref{newton}, the residual vector $\bs{F}^{n}=\bs{F}(\bs{Y}^n)=\bs{0}$ comes from the weak formulation of the problem with the forcing term in the left-hand-side.  The Jacobian matrix is given by $\bs{J}^{n}=\bs{J}(\bs{Y}^{n})=D\bs{F}^{n}/D\bs{Y}^{n}$.
+In Eq. \eqref{newton}, the residual vector $\bs{F}^{n}=\bs{F}(\bs{Y}^n)=\bs{0}$ comes from the weak formulation of the problem with the forcing term in the left-hand-side.  The Jacobian matrix is given by $\bs{J}^{n}=\bs{J}(\bs{Y}^{n})=d\bs{F}^{n}/d\bs{Y}^{n}$.
