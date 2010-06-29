@@ -19,7 +19,7 @@ on a rectangular domain $\Omega$ with a  Dirichlet boundary condition $T(\bx,t) 
   k(T) = k(T_{ref}) + \left. \frac{\partial k}{\partial T}\right|_{ref} \left( T - T_{ref} \right)
 \end{align}
 %
-$c_p$ stands for the material heat capacity, $\rho$ for its density and $\kappa \sigma_{f}$ is the energy released per fission.  $Q_T$ is the extraneous temperature source and will be determined by the choice of the exact solution in the MMS procedure; it is a function of space and time in general.
+$c_p$ stands for the material heat capacity, $\rho$ for its density and $\kappa \Sigma_{f}$ is the energy released per fission.  $Q_T$ is the extraneous temperature source and will be determined by the choice of the exact solution in the MMS procedure; it is a function of space and time in general.
 
 The weak formulation of the time discretized (implicit Euler) heat conduction problem is derived in the standard way, by first multiplying the equation \eqref{heatcond_eq} with the test functions $u_{i}$ and then integrating over the domain $\Omega$
 \begin{align}
@@ -50,7 +50,7 @@ with the homogeneous zero Dirichlet condition. Doppler feedback is accounted in 
     \left( \sqrt{T} - \sqrt{T_{ref}} \right)
 \end{align}
 %
-$v$ is the neutron velocity, $D$ the diffusion coefficient, $nu$ and $\sigma_{f}$ the number of neutron per fission and the fission cross section respectively.  The forcing function $Q_{\phi}$ in the equation \eqref{neutron_eq} will be determined later when choosing the exact solutions, and substituting these into the governing equations.
+$v$ is the neutron velocity, $D$ the diffusion coefficient, $\nu$ and $\Sigma_{f}$ the number of neutron per fission and the fission cross section respectively.  The forcing function $Q_{\phi}$ in the equation \eqref{neutron_eq} will be determined later when choosing the exact solutions, and substituting these into the governing equations.
 
 Finally, the weak formulation of the neutronics problem reads
 \begin{align}
@@ -59,7 +59,7 @@ Finally, the weak formulation of the neutronics problem reads
   + \int_{\Omega} D \nabla \phi^{n+1} \cdot \nabla u_i d\bx 
   + \int_{\Omega} \Sigma_{a}(T^{n+1}) \phi^{n+1} u_i d\bx& \nonumber \\
   - \int_{\Omega} \nu \Sigma_{f} \phi^{n+1} u_i d\bx 
-  = \int_{\Omega} Q^{n+1} u_i d\bx&
+  = \int_{\Omega} Q_{\phi}^{n+1} u_i d\bx&
 \end{align}
 
 
