@@ -1,29 +1,30 @@
 \section*{THEORY}
-Method of Manufactured Solutions to verify convergence to exact solutions for a 2D nonlinear transient problem involving neutronics and heat conduction.
+\vspace{-4mm}
+Method of Manufactured Solutions to verify convergence to exact solutions for a 2D nonlinear transient problem involving two physic components: neutronics and heat conduction.
 
 \subsection*{Governing equations}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  HEAT CONDUCTION
 %\subsection*{$\rightarrow$Heat conduction}
-Let us solve the following equation for the temperature $T(\bx, t)$
+The temperature $T(\bx, t)$ in the medium is of solution of the heat equation 
 \begin{align}
   \rho c_p \frac{\partial T}{\partial t} 
   - \nabla\cdot(k(T) \nabla T) 
   - \kappa \Sigma_{f} \phi(\bx,t)
   = Q_T(\bx,t) \label{heatcond_eq}
 \end{align}
-on a rectangular domain $\Omega$ with a homogeneous (zero) Dirichlet boundary condition $T(\bx,t) = 0$ on $\partial\Omega$, where the thermal conductivity $k$ depends on the temperature $T$
+on a rectangular domain $\Omega$ with a  Dirichlet boundary condition $T(\bx,t) = T_{bd}$ on $\partial\Omega$, where the thermal conductivity $k$ depends on the temperature $T$, as follows
 \begin{align}
   k(T) = k(T_{ref}) + \left. \frac{\partial k}{\partial T}\right|_{ref} \left( T - T_{ref} \right)
 \end{align}
-
-$c_p$ stands for the material heat capacity, $c_p$ for its heat capacity and $\kappa \sigma_{f}$ is the energy per fission.  $Q_T$ is the extraneaous temperature source and will be determined by the choice of the exact solution in the MMS procedure.  This is a function of space and time in general.
+%
+$c_p$ stands for the material heat capacity, $\rho$ for its density and $\kappa \sigma_{f}$ is the energy released per fission.  $Q_T$ is the extraneous temperature source and will be determined by the choice of the exact solution in the MMS procedure; it is a function of space and time in general.
 
 The weak formulation of the time discretized (implicit Euler) heat conduction problem is derived in the standard way, by first multiplying the equation \eqref{heatcond_eq} with the test functions $u_{i}$ and then integrating over the domain $\Omega$
 \begin{align}
   \int_{\Omega} \rho c_p \frac{T^{n+1}-T{^n}}{\tau} u_i d\bx 
-  - \int_{\partial\Omega} k(T^{n+1}) \nabla T^{n+1} u_i \cdot \bs{n} d\bx&  \nonumber \\
+  - \int_{\partial\Omega} k(T^{n+1}) \nabla T^{n+1} u_i \cdot \bs{n} d\bx_{bd}&  \nonumber \\
   + \int_{\Omega} k(T^{n+1}) \nabla T^{n+1} \cdot \nabla u_i d\bx
   - \int_{\Omega} \kappa \Sigma_{f} \phi^{n+1} u_i d\bx& \nonumber \\
   = \int_{\Omega} Q_T^{n+1} u_i d\bx& \label{heatcond_wf}
@@ -33,28 +34,28 @@ The weak formulation of the time discretized (implicit Euler) heat conduction pr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  NEUTRONICS
 %\subsection*{$\rightarrow$Neutronics}
-The neutron flux $\phi(\bx,t)$ is described by means of a simple one-group neutron diffusion equation
+The neutron flux $\phi(\bx,t)$ is described by means of a  one-group neutron diffusion equation
 \begin{align}
   \frac{1}{v} \frac{\partial\phi}{\partial t} 
   - \nabla\cdot(D \nabla \phi) 
   + \Sigma_{a}(T) \phi 
   - \nu \Sigma_{f} \phi
-  = Q(\bx,t) \label{neutron_eq}
+  = Q_{\phi}(\bx,t) \label{neutron_eq}
 \end{align}
-
-Doppler feedback is accounted in the model through the absorption cross section $\Sigma_{a}$, which is affected by temperature variations.
+%
+with the homogeneous zero Dirichlet condition. Doppler feedback is accounted in the model through the absorption cross section $\Sigma_{a}$, which is affected by temperature variations:
 \begin{align}
   \Sigma_{a}(T) = \Sigma_{a}(T_{ref}) 
   + \left. \frac{\partial \Sigma_{a}}{\partial \sqrt{T}}\right|_{ref} 
     \left( \sqrt{T} - \sqrt{T_{ref}} \right)
 \end{align}
+%
+$v$ is the neutron velocity, $D$ the diffusion coefficient, $nu$ and $\sigma_{f}$ the number of neutron per fission and the fission cross section respectively.  The forcing function $Q_{\phi}$ in the equation \eqref{neutron_eq} will be determined later when choosing the exact solutions, and substituting these into the governing equations.
 
-$v$ is the neutron velocity, $D$ the diffusion coefficient, $nu$ and $\sigma_{f}$ the number of neutron per fission and the fission cross section respectively.  The forcing function $Q$ in the equation \eqref{neutron_eq} will be determined later when choosing the exact solutions, and substituting these into the governing equations.
-
-Finally, with the homogeneous zero Dirichlet condition, the weak formulation of the neutronics problem reads
+Finally, the weak formulation of the neutronics problem reads
 \begin{align}
   \int_{\Omega} \frac{1}{v} \frac{\phi^{n+1}-\phi{^n}}{\tau} u_i d\bx 
-  - \int_{\partial\Omega} D \nabla \phi^{n+1} u_i \cdot \bs{n} d\bx& \nonumber \\
+  - \int_{\partial\Omega} D \nabla \phi^{n+1} u_i \cdot \bs{n} d\bx_{bd}& \nonumber \\
   + \int_{\Omega} D \nabla \phi^{n+1} \cdot \nabla u_i d\bx 
   + \int_{\Omega} \Sigma_{a}(T^{n+1}) \phi^{n+1} u_i d\bx& \nonumber \\
   - \int_{\Omega} \nu \Sigma_{f} \phi^{n+1} u_i d\bx 
@@ -65,7 +66,7 @@ Finally, with the homogeneous zero Dirichlet condition, the weak formulation of 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  NEWTON'S METHOD
 \subsection*{Newton's method}
-For fixed time level $n$ we will solve the time independent nonlinear problem for the temperature $T^{n}$ and the neutron flux $\phi^{n}$ by means of the Newton's Method.
+For a given time level $n$, we solve the time independent nonlinear problem for the temperature $T^{n}$ and the neutron flux $\phi^{n}$ by means of the Newton's Method.
 
 Let $\bs{Y}^n = (y_1^n,y_2^n,...,y_N^n)^T$ be the vector of unknown coefficients.  At each Newton iteration $k$ we solve
 \begin{align}
@@ -76,6 +77,6 @@ or
 \begin{align}
   \bs{J}(\bs{Y}_{k}^{n}) \delta\bs{Y}_{k}^{n} = - \bs{F}(\bs{Y}_{k}^{n}) \label{newton}
 \end{align}
-where $\bs{Y}_{k+1}^{n} = \bs{Y}_{k}^{n} + \delta\bs{Y}_{k}^{n}$, $n$ and $k$ being indices for time and Newton iterations respectively.
+where $\bs{Y}_{k+1}^{n} = \bs{Y}_{k}^{n} + \delta\bs{Y}_{k}^{n}$, and $n$ and $k$ are indices for time and Newton iterations, respectively.
 
 In Eq. \eqref{newton}, the residual vector $\bs{F}^{n}=\bs{F}(\bs{Y}^n)=\bs{0}$ comes from the weak formulation of the problem with the forcing term in the left-hand-side.  The Jacobian matrix is given by $\bs{J}^{n}=\bs{J}(\bs{Y}^{n})=D\bs{F}^{n}/D\bs{Y}^{n}$.
