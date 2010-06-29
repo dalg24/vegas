@@ -12,7 +12,7 @@ Contributing
 [shell prompt]$ git commit -m 'comment your changes'
 [shell prompt]$ git push
 
-Note: to be able to push to the remote repository you need to send your
+Note: a/ to be able to push to the remote repository you need to send your
 ssh public key to <lebrungd@neo.tamu.edu>
 Copy and paste the content of the file ~/.ssh/id_rsa.pub
 If it doesn't exist, do a
@@ -20,8 +20,10 @@ If it doesn't exist, do a
 If you still don't get it you're hopeless...
 Call (979)422-7165 and see with Bruno :)
 
+b/ for those working under Windows, see http://book.git-scm.com/6_git_on_windows.html and ask Jean for some hints.
 
-Contributors
+
+Authors
 ------------
 
 Damien Lebrun-Grandie
