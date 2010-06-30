@@ -1,7 +1,10 @@
 Generating the .pdf file (LaTeX)
 --------------------------------
 
-[shell prompt]$ pdflatex main.tex
+[shell prompt]$ pdflatex main
+[shell prompt]$ bibtex main
+[shell prompt]$ pdflatex main
+[shell prompt]$ pdflatex main
 
 
 Contributing
@@ -12,15 +15,17 @@ Contributing
 [shell prompt]$ git commit -m 'comment your changes'
 [shell prompt]$ git push
 
-Note: a/ to be able to push to the remote repository you need to send your
-ssh public key to <lebrungd@neo.tamu.edu>
+Note: 
+a/ to be able to push to the remote repository you need to send your
+ ssh public key to <lebrungd@neo.tamu.edu>
 Copy and paste the content of the file ~/.ssh/id_rsa.pub
 If it doesn't exist, do a
 [shell prompt]$ ssh-keygen -t rsa
 If you still don't get it you're hopeless...
-Call (979)422-7165 and see with Bruno :)
+See with Bruno :)
 
-b/ for those working under Windows, see http://book.git-scm.com/6_git_on_windows.html and ask Jean for some hints.
+b/ for those working under Windows, see http://book.git-scm.com/6_git_on_windows.html
+ and ask Jean for some hints.
 
 
 Authors
