@@ -9,21 +9,21 @@ Method of Manufactured Solutions to verify convergence to exact solutions for a 
 %\subsection*{$\rightarrow$Heat conduction}
 The temperature $T(\bx, t)$ in the medium is solution of the heat equation 
 \begin{align}
-  \rho c_p \frac{\partial T}{\partial t} 
+  \rho C_p \frac{\partial T}{\partial t} 
   - \nabla\cdot(k(T) \nabla T) 
   - \kappa \Sigma_{f} \phi(\bx,t)
   = Q_T(\bx,t) \label{heatcond_eq}
 \end{align}
-on a rectangular domain $\Omega$ with a  Dirichlet boundary condition $T(\bx,t) = T_{bd}$ on $\partial\Omega$, where the thermal conductivity $k$ depends on the temperature $T$, as follows
+on a rectangular domain $\Omega$ with a  Dirichlet boundary condition $T(\bx,t) = T_{bd}$ on $\partial\Omega$, where the thermal conductivity $k$ depends on the temperature $T$, introducing nonlinearity into the model
 \begin{align}
   k(T) = k(T_{ref}) + \left. \frac{\partial k}{\partial T}\right|_{ref} \left( T - T_{ref} \right)
 \end{align}
 %
-$c_p$ stands for the material heat capacity, $\rho$ for its density and $\kappa \Sigma_{f}$ is the energy released per fission.  $Q_T$ is the extraneous temperature source and will be determined by the choice of the exact solution in the MMS procedure; it is a function of space and time in general.
+$C_p$ stands for the material heat capacity, $\rho$ for its density.  $\Sigma_f$ is the fission cross section, and $\kappa$ the energy released per fission.  $Q_T$ is the extraneous temperature source and will be determined by the choice of the exact solution in the MMS procedure; it is a function of space and time in general.
 
 The weak formulation of the time discretized (implicit Euler) heat conduction problem is derived in the standard way, by first multiplying the equation \eqref{heatcond_eq} with the test functions $u_{i}$ and then integrating over the domain $\Omega$
 \begin{align}
-  \int_{\Omega} \rho c_p \frac{T^{n+1}-T{^n}}{\tau} u_i d\bx 
+  \int_{\Omega} \rho C_p \frac{T^{n+1}-T{^n}}{\tau} u_i d\bx 
   - \int_{\partial\Omega} k(T^{n+1}) \nabla T^{n+1} u_i \cdot \bs{n} d\bx_{bd}&  \nonumber \\
   + \int_{\Omega} k(T^{n+1}) \nabla T^{n+1} \cdot \nabla u_i d\bx
   - \int_{\Omega} \kappa \Sigma_{f} \phi^{n+1} u_i d\bx& \nonumber \\
@@ -43,7 +43,7 @@ The neutron flux $\phi(\bx,t)$ is described by means of a  one-group neutron dif
   = Q_{\phi}(\bx,t) \label{neutron_eq}
 \end{align}
 %
-with the homogeneous zero Dirichlet condition. Doppler feedback is accounted in the model through the absorption cross section $\Sigma_{a}$, which is affected by temperature variations:
+with the homogeneous zero Dirichlet condition. Doppler feedback is accounted in the model through the absorption cross section $\Sigma_{a}$, which is affected by temperature variations
 \begin{align}
   \Sigma_{a}(T) = \Sigma_{a}(T_{ref}) 
   + \left. \frac{\partial \Sigma_{a}}{\partial \sqrt{T}}\right|_{ref} 
