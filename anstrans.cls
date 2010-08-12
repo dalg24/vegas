@@ -62,7 +62,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand\@biblabel[1]{#1.} %change from [x] to x.
 
-%% reduce spacing in bibliography; thanks to José Carlos Santos.
+%% reduce spacing in bibliography; thanks to Jos≈Ω Carlos Santos.
 \let\@oldthebibliography=\thebibliography
 \let\@endoldthebibliography=\endthebibliography
 \let\@olditemsep=\itemsep
@@ -118,3 +118,4 @@
 \AtBeginDocument{
   \maketitle
 }
+
